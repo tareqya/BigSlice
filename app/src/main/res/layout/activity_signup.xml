@@ -107,9 +107,9 @@
         android:id="@+id/signup_BTN_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signup_TIL_confirmPassword"
+        android:layout_above="@+id/signup_TV_msg"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/primary"
         android:padding="10dp"
         android:text="Signup"
@@ -124,10 +124,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/signup_BTN_signup"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="10dp"
-
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
         />
 
 </RelativeLayout>

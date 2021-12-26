@@ -1,6 +1,7 @@
 package com.tareqyassin.bigslice.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         initView();
 
         login_BTN_login.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +71,11 @@ public class LoginActivity extends AppCompatActivity {
             }else{
                 Toast.makeText(LoginActivity.this, "Failed to login!", Toast.LENGTH_SHORT).show();
             }
+        }
+
+        @Override
+        public void onAddCustomerDone(boolean status, String msg) {
+
         }
     };
 

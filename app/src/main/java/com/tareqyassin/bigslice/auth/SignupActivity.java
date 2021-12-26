@@ -16,7 +16,6 @@ import com.tareqyassin.bigslice.R;
 import com.tareqyassin.bigslice.database.Customer;
 import com.tareqyassin.bigslice.database.DatabaseManager;
 import com.tareqyassin.bigslice.interfaces.CallBack_Auth;
-import com.tareqyassin.bigslice.interfaces.CallBack_Database;
 import com.tareqyassin.bigslice.utils.Validator;
 
 public class SignupActivity extends AppCompatActivity {
@@ -37,7 +36,6 @@ public class SignupActivity extends AppCompatActivity {
         addValidation();
         db = DatabaseManager.getMe();
         db.setCallBack_auth(callBack_auth);
-        db.setCallBack_Database(callBack_database);
         signup_BTN_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,10 +104,6 @@ public class SignupActivity extends AppCompatActivity {
             }
         }
 
-    };
-
-
-    private CallBack_Database callBack_database = new CallBack_Database() {
         @Override
         public void onAddCustomerDone(boolean status, String msg) {
             if(status) {
@@ -123,7 +117,9 @@ public class SignupActivity extends AppCompatActivity {
                 signup_BTN_signup.setEnabled(true);
             }
         }
+
     };
+
 
     private void initViews() {
         signup_TIE_confirmPassword = findViewById(R.id.signup_TIE_confirmPassword);

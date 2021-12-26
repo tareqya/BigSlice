@@ -5,12 +5,14 @@ public class Customer {
     private String full_name;
     private String phone;
     private String email;
+    private String imgName;
 
-    public Customer(String id, String full_name, String phone, String email) {
+    public Customer(String id, String full_name, String phone, String email, String imgName) {
         this.id = id;
         this.full_name = full_name;
         this.phone = phone;
         this.email = email;
+        this.imgName = imgName;
 
     }
 
@@ -54,4 +56,12 @@ public class Customer {
         return this;
     }
 
+    public String getImgName() {
+        return imgName;
+    }
+
+    public Customer setImgName(String imgName) {
+        this.imgName = imgName;
+        return this;
+    }
 }

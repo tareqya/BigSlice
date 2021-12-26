@@ -1,15 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.HomeFragment">
+    tools:context=".main.HomeFragment"
+    android:background="@color/background"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profile_ConstraintLayout_profileImg"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/user"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.536"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.049"
+                    />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        android:layout_centerInParent="true"/>
+                <ImageView
+                    android:id="@+id/profile_IMG_uploadImageProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/add_image"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.11"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.951" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/profile_TV_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_ConstraintLayout_profileImg"
+                android:text="Mia Smith"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textSize="34sp"
+                android:textColor="@color/text"
+                />
+
+            <TextView
+                android:id="@+id/profile_TV_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_TV_name"
+                android:text="mia.smith@gmail.com"
+                android:layout_centerHorizontal="true"
+                android:textSize="24sp"
+                android:textColor="@color/lightText"
+                />
+            <TextView
+                android:id="@+id/profile_TV_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_TV_email"
+                android:text="0549442529"
+                android:layout_centerHorizontal="true"
+                android:textSize="24sp"
+                android:textColor="@color/lightText"
+                />
+            <LinearLayout
+                android:id="@+id/profile_LL_editDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/profile_TV_phone"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:padding="5dp"
+                >
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_settings_24"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:text="Edit account details"
+                    android:textColor="@color/text"
+                    android:textSize="20sp" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_navigate_next_24"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/profile_LL_changeLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/profile_LL_editDetails"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:padding="5dp"
+                >
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_location_on_24"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:text="Change location"
+                    android:textColor="@color/text"
+                    android:textSize="20sp" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_navigate_next_24"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/profile_LL_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/profile_LL_changeLocation"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/white"
+                android:padding="5dp"
+                >
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_exit_to_app_24"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:text="Logout"
+                    android:textColor="@color/text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/profile_Lottie_loading"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_centerInParent="true"
+                android:scaleType="fitCenter"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_speed="0.4"
+                app:lottie_rawRes="@raw/loading" />
+
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

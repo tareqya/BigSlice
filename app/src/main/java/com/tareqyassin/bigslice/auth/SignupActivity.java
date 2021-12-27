@@ -4,13 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.tareqyassin.bigslice.R;
 import com.tareqyassin.bigslice.database.Customer;
@@ -18,35 +17,45 @@ import com.tareqyassin.bigslice.database.DatabaseManager;
 import com.tareqyassin.bigslice.interfaces.CallBack_Auth;
 import com.tareqyassin.bigslice.utils.Validator;
 
+import java.util.Objects;
+
 public class SignupActivity extends AppCompatActivity {
-    private TextInputEditText signup_TIE_fullName, signup_TIE_email, signup_TIE_password, signup_TIE_confirmPassword;
     private TextInputLayout signup_TIL_fullName, signup_TIL_email, signup_TIL_password, signup_TIL_confirmPassword;
     private MaterialButton signup_BTN_signup;
     private DatabaseManager db;
     private TextView signup_TV_msg;
     private Validator.Builder full_name_builder, email_builder, password_builder, confirmPassword_builder;
     private Customer newCustomer;
+    private LottieAnimationView signup_Lottie_loading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
+        // calling the action bar
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         initViews();
         addValidation();
-        db = DatabaseManager.getMe();
+        db = new DatabaseManager();
         db.setCallBack_auth(callBack_auth);
+        signup_Lottie_loading.setVisibility(View.INVISIBLE);
+
+
         signup_BTN_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(full_name_builder.getStatus() && email_builder.getStatus() && password_builder.getStatus() && confirmPassword_builder.getStatus()) {
+                    signup_Lottie_loading.playAnimation();
+                    signup_Lottie_loading.setVisibility(View.VISIBLE);
                     signup_BTN_signup.setEnabled(false);
-                    String email = signup_TIE_email.getText().toString();
-                    String password = signup_TIE_password.getText().toString();
+                    String email = signup_TIL_email.getEditText().getText().toString();
+                    String password = signup_TIL_password.getEditText().getText().toString();
                     db.createNewUser(SignupActivity.this, email, password);
                 }else {
                     signup_BTN_signup.setEnabled(true);
+                    signup_Lottie_loading.setVisibility(View.INVISIBLE);
                 }
 
             }
@@ -76,7 +85,7 @@ public class SignupActivity extends AppCompatActivity {
         confirmPassword_builder = Validator.Builder
                 .make(signup_TIL_confirmPassword)
                 .addWatcher(new Validator.Watcher_NotEmpty("Password can't be empty"))
-                .addWatcher(new Validator.Watcher_Equal("Confirm password doesn't match password ", signup_TIE_password))
+                .addWatcher(new Validator.Watcher_Equal("Confirm password doesn't match password ", signup_TIL_password.getEditText()))
                 .build();
     }
 
@@ -85,16 +94,20 @@ public class SignupActivity extends AppCompatActivity {
         public void onCreateAccountDone(boolean status, String msg, String uid) {
             if(status){
                 newCustomer = new Customer()
-                        .setEmail(signup_TIE_email.getText().toString())
-                        .setFull_name(signup_TIE_fullName.getText().toString())
+                        .setEmail(signup_TIL_email.getEditText().getText().toString())
+                        .setFull_name(signup_TIL_fullName.getEditText().getText().toString())
                         .setId(uid)
                         .setPhone("");
-                db.login(SignupActivity.this, newCustomer.getEmail(), signup_TIE_password.getText().toString());
+                db.login(SignupActivity.this, newCustomer.getEmail(), signup_TIL_password.getEditText().getText().toString());
             }else{
-                Log.d("auth", msg);
+                signup_BTN_signup.setEnabled(true);
                 signup_TV_msg.setText(msg);
                 signup_TV_msg.setTextColor(Color.RED);
+                signup_Lottie_loading.setVisibility(View.INVISIBLE);
+
             }
+
+
         }
 
         @Override
@@ -109,12 +122,13 @@ public class SignupActivity extends AppCompatActivity {
             if(status) {
                 db.logout();
                 Toast.makeText(SignupActivity.this, "Account created!", Toast.LENGTH_SHORT).show();
+                signup_Lottie_loading.setVisibility(View.INVISIBLE);
                 finish();
             }else{
-                Log.d("Create failed", msg);
                 signup_TV_msg.setText("Failed to create account!");
                 signup_TV_msg.setTextColor(Color.RED);
                 signup_BTN_signup.setEnabled(true);
+                signup_Lottie_loading.setVisibility(View.INVISIBLE);
             }
         }
 
@@ -122,17 +136,13 @@ public class SignupActivity extends AppCompatActivity {
 
 
     private void initViews() {
-        signup_TIE_confirmPassword = findViewById(R.id.signup_TIE_confirmPassword);
-        signup_TIE_email = findViewById(R.id.signup_TIE_email);
-        signup_TIE_password = findViewById(R.id.signup_TIE_password);
-        signup_TIE_fullName = findViewById(R.id.signup_TIE_fullName);
-        signup_BTN_signup = findViewById(R.id.signup_BTN_signup);
         signup_TV_msg = findViewById(R.id.signup_TV_msg);
-
+        signup_BTN_signup = findViewById(R.id.signup_BTN_signup);
         signup_TIL_fullName = findViewById(R.id.signup_TIL_fullName);
         signup_TIL_email = findViewById(R.id.signup_TIL_email);
         signup_TIL_password = findViewById(R.id.signup_TIL_password);
         signup_TIL_confirmPassword = findViewById(R.id.signup_TIL_confirmPassword);
+        signup_Lottie_loading = findViewById(R.id.signup_Lottie_loading);
 
     }
 }

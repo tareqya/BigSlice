@@ -22,11 +22,13 @@ import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tareqyassin.bigslice.R;
 import com.tareqyassin.bigslice.auth.LoginActivity;
 import com.tareqyassin.bigslice.database.Customer;
 import com.tareqyassin.bigslice.database.DatabaseManager;
 import com.tareqyassin.bigslice.interfaces.CallBack_Profile;
+import com.tareqyassin.bigslice.main.profilescreens.EditAccountActivity;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -35,61 +37,13 @@ import java.io.InputStream;
 public class ProfileFragment extends Fragment {
 
     private AppCompatActivity activity;
-    private ImageView profile_IMG_uploadImageProfile, profile_image;
+    private ImageView profile_image;
+    private FloatingActionButton profile_FBTN_uploadImage;
     private LinearLayout profile_LL_editDetails, profile_LL_changeLocation, profile_LL_logout;
     private TextView profile_TV_name, profile_TV_phone, profile_TV_email;
     private DatabaseManager db;
     private Customer currentCustomer;
     private LottieAnimationView profile_Lottie_loading;
-    private final CallBack_Profile callBack_profile = new CallBack_Profile() {
-        @Override
-        public void onFetchCustomerDataDone(Customer customer) {
-                currentCustomer = customer;
-                profile_TV_email.setText(customer.getEmail());
-                profile_TV_name.setText(customer.getFull_name());
-                profile_TV_phone.setText(customer.getPhone());
-                if(!customer.getImgName().equals("")) {
-                    db.downloadProfileImage(customer.getImgName());
-                }else {
-                    profile_Lottie_loading.setVisibility(View.INVISIBLE);
-                }
-        }
-
-        @Override
-        public void onImageUploadDone(boolean status, String msg, String imgName) {
-
-            if(status){
-                currentCustomer.setImgName(imgName);
-                db.updateCustomer(currentCustomer);
-            }else {
-                Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
-                profile_Lottie_loading.setVisibility(View.INVISIBLE);
-            }
-        }
-
-        @Override
-        public void updateCustomerDone(boolean status, String msg) {
-            Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
-            profile_Lottie_loading.setVisibility(View.INVISIBLE);
-
-        }
-
-        @Override
-        public void onImageDownloadUriDone(boolean status, String msg, String downloadUrl) {
-            if(status){
-                Glide.with(activity).load(downloadUrl).into(profile_image);
-            }else{
-                Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
-            }
-
-            profile_Lottie_loading.setVisibility(View.INVISIBLE);
-        }
-    };
-
-    public void setActivity(AppCompatActivity activity) {
-        this.activity = activity;
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -100,8 +54,12 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    public void setActivity(AppCompatActivity activity) {
+        this.activity = activity;
+    }
+
     private void initViews() {
-        db = DatabaseManager.getMe();
+        db = new DatabaseManager();
         db.setCallBack_Profile(callBack_profile);
         db.getCustomerById(db.getCurrentUser().getUid());
         profile_LL_logout.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +72,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        profile_IMG_uploadImageProfile.setOnClickListener(new View.OnClickListener() {
+        profile_FBTN_uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 uploadImage();
@@ -124,7 +82,7 @@ public class ProfileFragment extends Fragment {
         profile_LL_editDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(activity, EditAccountActivity.class));
             }
         });
 
@@ -137,7 +95,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void findViews(View view) {
-        profile_IMG_uploadImageProfile = view.findViewById(R.id.profile_IMG_uploadImageProfile);
+        profile_FBTN_uploadImage = view.findViewById(R.id.profile_FBTN_uploadImage);
         profile_LL_editDetails = view.findViewById(R.id.profile_LL_editDetails);
         profile_LL_changeLocation = view.findViewById(R.id.profile_LL_changeLocation);
         profile_LL_logout = view.findViewById(R.id.profile_LL_logout);
@@ -164,6 +122,7 @@ public class ProfileFragment extends Fragment {
                             final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                             profile_image.setImageBitmap(selectedImage);
                             db.uploadImage(activity, imageUri);
+                            profile_Lottie_loading.playAnimation();
                             profile_Lottie_loading.setVisibility(View.VISIBLE);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
@@ -180,5 +139,50 @@ public class ProfileFragment extends Fragment {
         photoPickerIntent.setType("image/*");
         someActivityResultLauncher.launch(photoPickerIntent);
     }
+
+    private final CallBack_Profile callBack_profile = new CallBack_Profile() {
+        @Override
+        public void onFetchCustomerDataDone(Customer customer) {
+            currentCustomer = customer;
+            profile_TV_email.setText(customer.getEmail());
+            profile_TV_name.setText(customer.getFull_name());
+            profile_TV_phone.setText(customer.getPhone());
+            if(!customer.getImgName().equals("")) {
+                db.downloadProfileImage(customer.getImgName());
+            }else {
+                profile_Lottie_loading.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        @Override
+        public void onImageUploadDone(boolean status, String msg, String imgName) {
+
+            if(status){
+                currentCustomer.setImgName(imgName);
+                db.updateCustomer(currentCustomer);
+            }else {
+                Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
+                profile_Lottie_loading.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        @Override
+        public void updateCustomerDone(boolean status, String msg) {
+            profile_Lottie_loading.setVisibility(View.INVISIBLE);
+
+        }
+
+        @Override
+        public void onImageDownloadUriDone(boolean status, String msg, String downloadUrl) {
+            if(status){
+                Glide.with(activity).load(downloadUrl).into(profile_image);
+            }else{
+                Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
+            }
+
+            profile_Lottie_loading.setVisibility(View.INVISIBLE);
+        }
+    };
+
 
 }

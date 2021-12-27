@@ -29,21 +29,13 @@ public class DatabaseManager {
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private FirebaseStorage mStorage;
-    private static DatabaseManager me = null;
     private CallBack_Auth callBack_auth;
     private CallBack_Profile callBack_profile;
 
-    private DatabaseManager(){
+    public DatabaseManager(){
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance("https://bigslice-60440-default-rtdb.europe-west1.firebasedatabase.app");
         mStorage = FirebaseStorage.getInstance();
-    }
-
-    public static void DatabaseInit(){
-        if(me == null){
-            me = new DatabaseManager();
-        }
-
     }
 
     public DatabaseManager setCallBack_auth(CallBack_Auth callBack_auth){
@@ -54,10 +46,6 @@ public class DatabaseManager {
     public DatabaseManager setCallBack_Profile(CallBack_Profile callBack_profile){
         this.callBack_profile = callBack_profile;
         return this;
-    }
-
-    public static DatabaseManager getMe(){
-        return me;
     }
 
     public FirebaseUser getCurrentUser(){
@@ -169,11 +157,8 @@ public class DatabaseManager {
 
 
     public void downloadProfileImage(String imgName){
-        this.downloadImage("CustomersImage/"+imgName);
-    }
 
-    private void downloadImage(String imgPath){
-        StorageReference storageReference = mStorage.getReference(imgPath);
+        StorageReference storageReference = mStorage.getReference("CustomersImage/"+imgName);
 
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override

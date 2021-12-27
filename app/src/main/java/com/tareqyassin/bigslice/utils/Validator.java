@@ -2,6 +2,7 @@ package com.tareqyassin.bigslice.utils;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 
@@ -72,6 +73,24 @@ public class Validator {
         }
     }
 
+    public static class Watcher_Phone extends Watcher {
+
+        public Watcher_Phone(String error) {
+            super(error);
+        }
+
+        @Override
+        public boolean privateCheck(String input) {
+            if(input.length() != 10)
+                return false;
+
+            if(input.length() >= 1 && input.charAt(0) != '0')
+                return false;
+
+            return true;
+        }
+    }
+
     public static class Watcher_password extends Watcher {
 
         public Watcher_password(String error) {
@@ -89,9 +108,9 @@ public class Validator {
     }
 
     public static class Watcher_Equal extends Watcher {
-        private TextInputEditText value;
+        private EditText value;
 
-        public Watcher_Equal(String error, TextInputEditText value) {
+        public Watcher_Equal(String error, EditText value) {
             super(error);
             this.value = value;
         }

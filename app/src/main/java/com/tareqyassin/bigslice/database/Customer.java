@@ -39,6 +39,8 @@ public class Customer {
     }
 
     public String getPhone() {
+        if(phone == null)
+            phone = "";
         return phone;
     }
 
@@ -57,6 +59,8 @@ public class Customer {
     }
 
     public String getImgName() {
+        if(imgName == null)
+            imgName = "";
         return imgName;
     }
 

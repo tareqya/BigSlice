@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth.SignupActivity">
+    tools:context=".main.profilescreens.EditAccountActivity">
 
     <TextView
-        android:id="@+id/signup_TV_title"
+        android:id="@+id/editAccount_TV_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create new account"
+        android:text="Edit account details"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
@@ -22,11 +21,11 @@
         />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/signup_TIL_fullName"
+        android:id="@+id/editAccount_TIL_fullName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Full name"
-        android:layout_below="@+id/signup_TV_title"
+        android:layout_below="@+id/editAccount_TV_title"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
         app:boxStrokeColor="@color/primary"
@@ -42,11 +41,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/signup_TIL_email"
+        android:id="@+id/editAccount_TIL_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        android:layout_below="@+id/signup_TIL_fullName"
+        android:hint="Phone"
+        android:layout_below="@+id/editAccount_TIL_fullName"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
         app:boxStrokeColor="@color/primary"
@@ -54,82 +53,33 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-
+            android:inputType="phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/signup_TIL_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:layout_below="@+id/signup_TIL_email"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-        app:boxStrokeColor="@color/primary"
-        app:hintTextColor="@color/primary"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <com.google.android.material.textfield.TextInputEditText
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            tools:ignore="TouchTargetSizeCheck" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/signup_TIL_confirmPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Confirm Password"
-        android:layout_below="@+id/signup_TIL_password"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-        app:boxStrokeColor="@color/primary"
-        app:hintTextColor="@color/primary"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <com.google.android.material.textfield.TextInputEditText
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/signup_BTN_signup"
+        android:id="@+id/editAccount_BTN_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/signup_TV_msg"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/primary"
         android:padding="10dp"
-        android:text="Signup"
+        android:text="Update"
         android:textAllCaps="false"
         android:textColor="@color/text"
         android:textSize="24sp"
         android:textStyle="bold"
         app:cornerRadius="30dp" />
 
-    <TextView
-        android:id="@+id/signup_TV_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
-        />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/signup_Lottie_loading"
+        android:id="@+id/editAccount_Lottie_loading"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerInParent="true"

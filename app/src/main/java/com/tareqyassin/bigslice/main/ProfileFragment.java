@@ -29,6 +29,7 @@ import com.tareqyassin.bigslice.database.Customer;
 import com.tareqyassin.bigslice.database.DatabaseManager;
 import com.tareqyassin.bigslice.interfaces.CallBack_Profile;
 import com.tareqyassin.bigslice.main.profilescreens.EditAccountActivity;
+import com.tareqyassin.bigslice.main.profilescreens.UpdateLocationActivity;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -89,6 +90,7 @@ public class ProfileFragment extends Fragment {
         profile_LL_changeLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(activity, UpdateLocationActivity.class));
 
             }
         });

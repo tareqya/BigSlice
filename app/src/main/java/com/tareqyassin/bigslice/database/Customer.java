@@ -6,13 +6,15 @@ public class Customer {
     private String phone;
     private String email;
     private String imgName;
+    private MyLocation location;
 
-    public Customer(String id, String full_name, String phone, String email, String imgName) {
+    public Customer(String id, String full_name, String phone, String email, String imgName, MyLocation location) {
         this.id = id;
         this.full_name = full_name;
         this.phone = phone;
         this.email = email;
         this.imgName = imgName;
+        this.location = location;
 
     }
 
@@ -66,6 +68,15 @@ public class Customer {
 
     public Customer setImgName(String imgName) {
         this.imgName = imgName;
+        return this;
+    }
+
+    public MyLocation getLocation() {
+        return location;
+    }
+
+    public Customer setLocation(MyLocation location) {
+        this.location = location;
         return this;
     }
 }

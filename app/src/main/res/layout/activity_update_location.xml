@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.profilescreens.UpdateLocationActivity">
+
+    <TextView
+        android:id="@+id/updateLocation_TV_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Update your Location"
+        android:textSize="32sp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/text"
+        android:textStyle="bold"
+        />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/updateLocation_Lottie_loading"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/updateLocation_TV_title"
+        android:scaleType="fitCenter"
+        android:translationZ="1dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/location"
+        app:lottie_speed="0.4" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/updateLocation_TIL_country"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Country"
+        android:layout_below="@+id/updateLocation_Lottie_loading"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        app:boxStrokeColor="@color/primary"
+        app:hintTextColor="@color/primary"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/updateLocation_TIL_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="City"
+        android:layout_below="@+id/updateLocation_TIL_country"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        app:boxStrokeColor="@color/primary"
+        app:hintTextColor="@color/primary"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/updateLocation_TIL_street"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Street"
+        android:layout_below="@+id/updateLocation_TIL_city"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        app:boxStrokeColor="@color/primary"
+        app:hintTextColor="@color/primary"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/updateLocation_BTN_currentLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/updateLocation_TIL_street"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/updateLocation_TIL_street"
+        android:text="Get My Location"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/price"
+        app:icon="@drawable/ic_baseline_my_location_24"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/updateLocation_BTN_updateLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/primary"
+        android:padding="10dp"
+        android:text="Update"
+        android:textAllCaps="false"
+        android:textColor="@color/text"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="30dp" />
+
+</RelativeLayout>

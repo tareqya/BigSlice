@@ -102,11 +102,12 @@ public class UpdateLocationActivity extends AppCompatActivity {
             List<Address> address = geoCoder.getFromLocation(latitude, longitude, 1);
 
 
-            String city = address.get(0).getFeatureName();
+            String city = address.get(0).getLocality();
             String country = address.get(0).getCountryName();
-
+            String street = address.get(0).getFeatureName();
             updateLocation_TIL_city.getEditText().setText(city);
             updateLocation_TIL_country.getEditText().setText(country);
+            updateLocation_TIL_street.getEditText().setText(street);
         } catch (IOException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         } catch (NullPointerException e) {

@@ -3,13 +3,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.HomeFragment">
+    tools:context=".main.HomeFragment"
+    android:background="@color/background">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home"
-        android:layout_centerInParent="true"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/home_TV_MainTitle"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delivery"
+                    android:textStyle="bold"
+                    android:textSize="32sp"
+                    android:textColor="@color/text"
+                    />
+                <TextView
+                    android:id="@+id/home_TV_categoriesTitle"
+                    android:layout_marginTop="50dp"
+                    android:layout_below="@+id/home_TV_MainTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Categories"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/text"
+                    android:textStyle="bold"
+                    />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_RV_categories"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/home_TV_categoriesTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/home_TV_menu"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/home_RV_categories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Menu"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/text"
+                    android:textStyle="bold"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_RV_menu"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/home_TV_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

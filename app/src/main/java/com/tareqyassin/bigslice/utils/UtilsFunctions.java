@@ -15,5 +15,14 @@ public class UtilsFunctions {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
+    public static String convertMinToStringTime(int min){
+        if(min <= 60)
+            return min + " min";
+
+        int m = min % 60;
+        int h = min / 60;
+
+        return h + " hour "+m + " min";
+    }
 
 }

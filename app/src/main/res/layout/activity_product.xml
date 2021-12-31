@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/background"
+    tools:context=".main.homescreens.ProductActivity">
+
+    <TextView
+        android:id="@+id/product_TV_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/text"
+        android:text="Pizza name"
+        />
+
+    <TextView
+        android:id="@+id/product_TV_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/product_TV_title"
+        android:text="$5.99"
+        android:textStyle="bold"
+        android:textSize="28sp"
+        android:textColor="@color/price"
+        android:layout_marginTop="20dp"
+        />
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/product_TV_price"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Size"
+                android:textSize="14sp"
+                android:textColor="@color/lightText"
+                />
+            <TextView
+                android:id="@+id/product_TV_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medium 14'"
+                android:textSize="18sp"
+                android:textColor="@color/text"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delivery in"
+                android:textSize="14sp"
+                android:textColor="@color/lightText"
+                />
+
+            <TextView
+                android:id="@+id/product_TV_deliveryTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30 min"
+                android:textSize="18sp"
+                android:textColor="@color/text"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/product_IMG_productImage"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:src="@drawable/pizza1"
+                android:scaleType="centerInside"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/product_BTN_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="80dp"
+        android:backgroundTint="@color/primary"
+        android:padding="10dp"
+        android:text="Create an order"
+        android:textAllCaps="false"
+        android:textColor="@color/text"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="30dp" />
+</RelativeLayout>

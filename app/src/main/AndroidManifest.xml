@@ -17,9 +17,14 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.BigSlice">
         <activity
+            android:name=".main.homescreens.ProductActivity"
+            android:exported="true"
+            android:parentActivityName=".main.MainActivity"
+            />
+        <activity
             android:name=".main.profilescreens.UpdateLocationActivity"
             android:exported="true"
-            android:parentActivityName=".main.MainActivity"/>
+            android:parentActivityName=".main.MainActivity" />
         <activity
             android:name=".main.profilescreens.EditAccountActivity"
             android:exported="true"

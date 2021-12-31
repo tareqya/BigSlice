@@ -21,6 +21,7 @@ import android.location.Address;
 
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +39,7 @@ public class UpdateLocationActivity extends AppCompatActivity {
     private Validator.Builder city_builder, country_builder, street_builder;
     private DatabaseManager db;
     private Customer currentCustomer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ public class UpdateLocationActivity extends AppCompatActivity {
 
     }
 
-    private void findViews(){
+    private void findViews() {
         updateLocation_BTN_currentLocation = findViewById(R.id.updateLocation_BTN_currentLocation);
         updateLocation_BTN_updateLocation = findViewById(R.id.updateLocation_BTN_updateLocation);
         updateLocation_TIL_street = findViewById(R.id.updateLocation_TIL_street);
@@ -72,7 +74,7 @@ public class UpdateLocationActivity extends AppCompatActivity {
         updateLocation_BTN_updateLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(country_builder.getStatus() && city_builder.getStatus() && street_builder.getStatus()) {
+                if (country_builder.getStatus() && city_builder.getStatus() && street_builder.getStatus()) {
                     String city = updateLocation_TIL_city.getEditText().getText().toString();
                     String country = updateLocation_TIL_country.getEditText().getText().toString();
                     String street = updateLocation_TIL_street.getEditText().getText().toString();
@@ -90,12 +92,7 @@ public class UpdateLocationActivity extends AppCompatActivity {
     public void updateCurrentAddress() {
 
         Geocoder geoCoder = new Geocoder(this, Locale.getDefault()); //it is Geocoder
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Location locationGPS = getLastKnownLocation();//locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         try {
             double latitude = locationGPS.getLatitude();
             double longitude = locationGPS.getLongitude();
@@ -111,10 +108,29 @@ public class UpdateLocationActivity extends AppCompatActivity {
         } catch (IOException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         } catch (NullPointerException e) {
-            Toast.makeText(this, "Please turn GPS", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Failed to get the last known location", Toast.LENGTH_SHORT).show();
         }
     }
 
+    private Location getLastKnownLocation() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+               return null;
+            }
+            Location l = locationManager.getLastKnownLocation(provider);
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                // Found best last known location: %s", l);
+                bestLocation = l;
+            }
+        }
+        return bestLocation;
+    }
 
     public void initVars() {
         db = new DatabaseManager();

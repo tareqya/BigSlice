@@ -65,19 +65,19 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         switch (order.getOrderStatus()){
             case 0:
-                orderViewHolder.order_CV_status1.setBackgroundColor(Color.GREEN);
+                orderViewHolder.order_CV_status1.setBackgroundColor(Color.rgb(66, 186, 150));
                 orderViewHolder.order_CV_status2.setBackgroundColor(Color.WHITE);
                 orderViewHolder.order_CV_status3.setBackgroundColor(Color.WHITE);
                 break;
             case 1:
                 orderViewHolder.order_CV_status1.setBackgroundColor(Color.WHITE);
-                orderViewHolder.order_CV_status1.setBackgroundColor(Color.GREEN);
-                orderViewHolder.order_CV_status2.setBackgroundColor(Color.GREEN);
+                orderViewHolder.order_CV_status1.setBackgroundColor(Color.rgb(66, 186, 150));
+                orderViewHolder.order_CV_status2.setBackgroundColor(Color.rgb(66, 186, 150));
                 break;
             case 2:
-                orderViewHolder.order_CV_status1.setBackgroundColor(Color.GREEN);
-                orderViewHolder.order_CV_status2.setBackgroundColor(Color.GREEN);
-                orderViewHolder.order_CV_status3.setBackgroundColor(Color.GREEN);
+                orderViewHolder.order_CV_status1.setBackgroundColor(Color.rgb(66, 186, 150));
+                orderViewHolder.order_CV_status2.setBackgroundColor(Color.rgb(66, 186, 150));
+                orderViewHolder.order_CV_status3.setBackgroundColor(Color.rgb(66, 186, 150));
                 break;
 
         }

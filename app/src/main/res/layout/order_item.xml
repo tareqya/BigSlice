@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="20dp"
+    android:elevation="8dp"
+    app:cardElevation="8dp"
+    android:layout_margin="10dp"
+    >
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/order_TV_orderNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order number: 56278"
+                    android:textColor="@color/text"
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"
+                    />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/order_TV_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Primavera Pizza"
+                    android:textColor="@color/text"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    />
+                <TextView
+                    android:id="@+id/order_TV_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Meduim 14'"
+                    android:textColor="@color/lightText"
+                    android:textSize="16sp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/order_TV_orderDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16:30 10/12/2021"
+                    android:textColor="@color/lightText"
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"
+                    />
+                <TextView
+                    android:id="@+id/order_TV_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="79.9 ₪"
+                    android:textColor="@color/price"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/order_TV_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Read more"
+                    android:textColor="@color/blue"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    />
+                <LinearLayout
+                    android:id="@+id/product_LL_statusBox"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.card.MaterialCardView
+
+                        android:id="@+id/order_CV_status1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="20dp"
+                        android:elevation="8dp"
+                        app:cardElevation="8dp"
+                        android:layout_margin="10dp"
+                        >
+                        <TextView
+                            android:padding="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Preparing order"
+                            android:textSize="14sp"
+                            />
+                    </com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/order_CV_status2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="20dp"
+                        android:elevation="8dp"
+                        app:cardElevation="8dp"
+                        android:layout_margin="10dp"
+                        >
+                        <TextView
+                            android:padding="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Order delivered"
+                            android:textSize="14sp"
+                            />
+                    </com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/order_CV_status3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="20dp"
+                        android:elevation="8dp"
+                        app:cardElevation="8dp"
+                        android:layout_margin="10dp"
+                        >
+                        <TextView
+                            android:padding="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Order received"
+                            android:textSize="14sp"
+                            />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/order_IMG_orderImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:src="@drawable/pizza1"
+                    android:scaleType="centerInside"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

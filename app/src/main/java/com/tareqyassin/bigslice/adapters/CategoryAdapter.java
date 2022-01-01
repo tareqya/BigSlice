@@ -1,8 +1,6 @@
 package com.tareqyassin.bigslice.adapters;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.material.card.MaterialCardView;
 import com.tareqyassin.bigslice.R;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

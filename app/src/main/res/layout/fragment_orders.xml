@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,9 +9,35 @@
 
 
     <TextView
+        android:id="@+id/productFrg_TV_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Orders"
-        android:layout_centerInParent="true"/>
+        android:text="My Orders"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/text"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productFrg_RV_products"
+        android:layout_below="@+id/productFrg_TV_title"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/productFrg_Lottie_loading"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:scaleType="fitCenter"
+        android:translationZ="1dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/delivering"
+        app:lottie_speed="0.4" />
 
 </RelativeLayout>

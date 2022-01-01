@@ -53,7 +53,7 @@
                     android:id="@+id/menu_TV_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text"
+                    android:textColor="@color/price"
                     android:text="79.9 ₪"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"

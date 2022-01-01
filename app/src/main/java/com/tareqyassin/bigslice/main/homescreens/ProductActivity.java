@@ -6,14 +6,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.button.MaterialButton;
 import com.tareqyassin.bigslice.App;
 import com.tareqyassin.bigslice.R;
+import com.tareqyassin.bigslice.database.DatabaseManager;
+import com.tareqyassin.bigslice.database.Order;
 import com.tareqyassin.bigslice.database.Product;
+import com.tareqyassin.bigslice.interfaces.Callback_Order;
 import com.tareqyassin.bigslice.utils.UtilsFunctions;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
+import java.util.Random;
 
 public class ProductActivity extends AppCompatActivity {
 
@@ -21,6 +30,8 @@ public class ProductActivity extends AppCompatActivity {
     private ImageView product_IMG_productImage;
     private MaterialButton product_BTN_order;
     private Product product;
+    private DatabaseManager db;
+    private LottieAnimationView product_Lottie_loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +40,49 @@ public class ProductActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         product = (Product) getIntent().getSerializableExtra("product");
+        db = new DatabaseManager();
+        db.setCallback_Order(callback_order);
         findViews();
         initViews();
 
     }
 
+    private Callback_Order callback_order = new Callback_Order() {
+        @Override
+        public void onOrderAddDone(boolean status, String msg) {
+            if(status){
+                Toast.makeText(ProductActivity.this, msg, Toast.LENGTH_SHORT).show();
+                finish();
+            }else{
+                Toast.makeText(ProductActivity.this, msg, Toast.LENGTH_SHORT).show();
+            }
+            product_Lottie_loading.setVisibility(View.INVISIBLE);
+        }
+
+        @Override
+        public void onFetchCustomerOrdersDone(ArrayList<Order> orders) {
+
+        }
+    };
+
     private void initViews() {
+        product_Lottie_loading.setVisibility(View.INVISIBLE);
         product_BTN_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                product_Lottie_loading.setVisibility(View.VISIBLE);
+                Random rnd = new Random();
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                Date date = new Date();
 
+                Order order = new Order()
+                        .setOrderNumber(rnd.nextInt(100000) + 10000)
+                        .setOrderDate(formatter.format(date))
+                        .setProduct(product)
+                        .setOrderStatus(0)
+                        .setCustomerId(db.getCurrentUser().getUid());
+
+                db.addOrder(ProductActivity.this, order);
             }
         });
 
@@ -57,6 +101,7 @@ public class ProductActivity extends AppCompatActivity {
         product_TV_deliveryTime = findViewById(R.id.product_TV_deliveryTime);
         product_IMG_productImage = findViewById(R.id.product_IMG_productImage);
         product_BTN_order = findViewById(R.id.product_BTN_order);
+        product_Lottie_loading = findViewById(R.id.product_Lottie_loading);
     }
 
 

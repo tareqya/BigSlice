@@ -21,7 +21,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.tareqyassin.bigslice.interfaces.CallBack_Auth;
 import com.tareqyassin.bigslice.interfaces.CallBack_Profile;
+import com.tareqyassin.bigslice.interfaces.Callback_Order;
 import com.tareqyassin.bigslice.utils.UtilsFunctions;
+
+import java.util.ArrayList;
 
 
 public class DatabaseManager {
@@ -31,6 +34,7 @@ public class DatabaseManager {
     private FirebaseStorage mStorage;
     private CallBack_Auth callBack_auth;
     private CallBack_Profile callBack_profile;
+    private Callback_Order callback_order;
 
     public DatabaseManager(){
         mAuth = FirebaseAuth.getInstance();
@@ -40,6 +44,11 @@ public class DatabaseManager {
 
     public DatabaseManager setCallBack_auth(CallBack_Auth callBack_auth){
         this.callBack_auth = callBack_auth;
+        return this;
+    }
+
+    public DatabaseManager setCallback_Order(Callback_Order callback_order){
+        this.callback_order = callback_order;
         return this;
     }
 
@@ -174,6 +183,47 @@ public class DatabaseManager {
                 if(callBack_profile != null){
                     callBack_profile.onImageDownloadUriDone(false, e.getMessage(), "");
                 }
+            }
+        });
+    }
+
+
+    public void addOrder(AppCompatActivity activity, Order order){
+        mDatabase.getReference("Orders").push().setValue(order)
+                .addOnCompleteListener(activity, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                       if(callback_order == null)
+                           return;
+
+                       if(task.isSuccessful()){
+                            callback_order.onOrderAddDone(true, "Order has been placed");
+                       }else {
+                           callback_order.onOrderAddDone(false, task.getException().getMessage());
+                       }
+                    }
+                });
+    }
+
+
+    public void getCustomerOrders(String customerId){
+        mDatabase.getReference("Orders").orderByChild("customerId").equalTo(customerId)
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(callback_order != null){
+                    ArrayList<Order> orders = new ArrayList<>();
+                    for (DataSnapshot snap : snapshot.getChildren()){
+                        orders.add(snap.getValue(Order.class));
+                    }
+                    callback_order.onFetchCustomerOrdersDone(orders);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

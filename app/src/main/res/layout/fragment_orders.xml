@@ -8,25 +8,38 @@
     tools:context=".main.HomeFragment">
 
 
-    <TextView
-        android:id="@+id/productFrg_TV_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Orders"
-        android:layout_alignParentStart="true"
-        android:textColor="@color/text"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:layout_margin="10dp"
-        />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/productFrg_RV_products"
-        android:layout_below="@+id/productFrg_TV_title"
-        android:layout_marginTop="10dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/productFrg_TV_title"
+                    android:layout_alignParentStart="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="My Orders"
+                    android:textColor="@color/text"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/productFrg_RV_products"
+                    android:layout_below="@+id/productFrg_TV_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/productFrg_Lottie_loading"

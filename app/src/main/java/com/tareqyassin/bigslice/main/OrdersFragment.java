@@ -18,6 +18,7 @@ import com.tareqyassin.bigslice.R;
 import com.tareqyassin.bigslice.adapters.OrderAdapter;
 import com.tareqyassin.bigslice.database.DatabaseManager;
 import com.tareqyassin.bigslice.database.Order;
+import com.tareqyassin.bigslice.interfaces.CallBack_Main;
 import com.tareqyassin.bigslice.interfaces.Callback_Order;
 import com.tareqyassin.bigslice.interfaces.OrderClickedListener;
 import com.tareqyassin.bigslice.utils.DateComparator;
@@ -40,7 +41,6 @@ public class OrdersFragment extends Fragment {
     public void setActivity(AppCompatActivity activity) {
         this.activity = activity;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

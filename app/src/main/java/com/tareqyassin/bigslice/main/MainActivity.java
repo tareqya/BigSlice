@@ -3,8 +3,11 @@ package com.tareqyassin.bigslice.main;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.tareqyassin.bigslice.R;
+import com.tareqyassin.bigslice.database.MSPV;
+import com.tareqyassin.bigslice.interfaces.CallBack_Main;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     private ProfileFragment profileFragment;
     private OrdersFragment ordersFragment;
     private BottomNavigationView bottom_navigation;
+    public static final String ORDERS_NUM = "ORDERS_NUM";
+    private int count = 0;
+    private MSPV localDB;
 
     private FrameLayout homeFrame, profileFrame, ordersFrame;
 
@@ -24,8 +30,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        localDB = MSPV.getMe();
+        count = localDB.getInt(ORDERS_NUM, 0);
         findViews();
         initViews();
+
+
 
         bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -38,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case R.id.menu_orders:
+                        count = 0;
+                        localDB.putInt(ORDERS_NUM, count);
+                        hideOrderBadge();
                         homeFrame.setVisibility(View.INVISIBLE);
                         ordersFrame.setVisibility(View.VISIBLE);
                         profileFrame.setVisibility(View.INVISIBLE);
@@ -64,6 +78,14 @@ public class MainActivity extends AppCompatActivity {
     public void initViews(){
         homeFragment = new HomeFragment();
         homeFragment.setActivity(this);
+        homeFragment.setCallBack_main(new CallBack_Main() {
+            @Override
+            public void onOrderPlaced() {
+                count++;
+                showOrderBadge(count);
+                localDB.putInt(ORDERS_NUM, count);
+            }
+        });
         getSupportFragmentManager().beginTransaction().add(R.id.home_frame_home, homeFragment).commit();
 
         profileFragment = new ProfileFragment();
@@ -76,9 +98,25 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.home_frame_orders, ordersFragment).commit();
         ordersFrame.setVisibility(View.INVISIBLE);
 
+        if(count > 0){
+            showOrderBadge(count);
+        }else{
+            hideOrderBadge();
+        }
 
     }
 
+
+    public void showOrderBadge(int number){
+        BadgeDrawable badge = bottom_navigation.getOrCreateBadge(R.id.menu_orders);
+        badge.setVisible(true);
+        badge.setNumber(number);
+    }
+
+    public void hideOrderBadge(){
+        BadgeDrawable badge = bottom_navigation.getOrCreateBadge(R.id.menu_orders);
+        badge.setVisible(false);
+    }
 
 
 }

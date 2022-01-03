@@ -52,6 +52,7 @@ public class ProductActivity extends AppCompatActivity {
         public void onOrderAddDone(boolean status, String msg) {
             if(status){
                 Toast.makeText(ProductActivity.this, msg, Toast.LENGTH_SHORT).show();
+                setResult(AppCompatActivity.RESULT_OK);
                 finish();
             }else{
                 Toast.makeText(ProductActivity.this, msg, Toast.LENGTH_SHORT).show();

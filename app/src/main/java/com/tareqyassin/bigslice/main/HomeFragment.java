@@ -2,8 +2,16 @@ package com.tareqyassin.bigslice.main;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -13,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.tareqyassin.bigslice.App;
 import com.tareqyassin.bigslice.R;
@@ -20,10 +29,13 @@ import com.tareqyassin.bigslice.adapters.CategoryAdapter;
 import com.tareqyassin.bigslice.adapters.MenuAdapter;
 import com.tareqyassin.bigslice.database.Category;
 import com.tareqyassin.bigslice.database.Product;
+import com.tareqyassin.bigslice.interfaces.CallBack_Main;
 import com.tareqyassin.bigslice.interfaces.CategoryClickedListener;
 import com.tareqyassin.bigslice.interfaces.MenuClickedListener;
 import com.tareqyassin.bigslice.main.homescreens.ProductActivity;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -37,13 +49,16 @@ public class HomeFragment extends Fragment {
     private RecyclerView home_RV_menu;
     private CategoryAdapter adapter_score;
     private MenuAdapter menuAdapter;
-
+    private CallBack_Main callBack_main;
 
     public void setActivity(AppCompatActivity activity) {
         this.activity = activity;
     }
 
-
+    public void setCallBack_main (CallBack_Main callBack_main){
+        this.callBack_main = callBack_main;
+    }
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -83,10 +98,9 @@ public class HomeFragment extends Fragment {
             public void menuItemClicked(Product product, int position) {
                 Intent intent = new Intent(activity, ProductActivity.class);
                 intent.putExtra("product", product);
-                startActivity(intent);
+                orderActivityResultLauncher.launch(intent);
             }
         });
-
     }
 
     private void initVars() {
@@ -98,5 +112,17 @@ public class HomeFragment extends Fragment {
         home_RV_menu = view.findViewById(R.id.home_RV_menu);
     }
 
+    ActivityResultLauncher<Intent> orderActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == AppCompatActivity.RESULT_OK) {
+                        callBack_main.onOrderPlaced();
+                    }
+                }
+            });
+    
 
+    
 }

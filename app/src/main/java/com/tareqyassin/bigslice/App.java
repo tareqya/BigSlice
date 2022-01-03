@@ -5,17 +5,19 @@ import android.app.Application;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.tareqyassin.bigslice.database.Category;
+import com.tareqyassin.bigslice.database.MSPV;
 import com.tareqyassin.bigslice.database.Product;
 
 import java.util.ArrayList;
 
 public class App extends Application {
     public static final int DELIVERY_TIME = 15; // min
+
     @Override
     public void onCreate() {
         super.onCreate();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
+        MSPV.initHelper(this);
     }
 
     public static  ArrayList<Category> generateCategoriesData(){

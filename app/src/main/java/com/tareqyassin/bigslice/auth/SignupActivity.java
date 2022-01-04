@@ -111,9 +111,11 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onLoginDone(boolean status) {
+        public void onLoginDone(boolean status, String msg) {
             if(status){
                 db.addNewCustomer(SignupActivity.this, newCustomer);
+            }else{
+                Toast.makeText(SignupActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
         }
 

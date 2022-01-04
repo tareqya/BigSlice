@@ -35,10 +35,13 @@ public class LoginActivity extends AppCompatActivity {
         login_BTN_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login_Lottie_loading.setVisibility(View.VISIBLE);
-
                 String email = login_TIL_email.getEditText().getText().toString();
                 String password = login_TIL_password.getEditText().getText().toString();
+                if(email.equals("") || password.equals("")) {
+                    Toast.makeText(LoginActivity.this, "Email or Password can't be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                login_Lottie_loading.setVisibility(View.VISIBLE);
                 db.login(LoginActivity.this, email, password);
 
             }
@@ -68,11 +71,11 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onLoginDone(boolean status) {
+        public void onLoginDone(boolean status, String msg) {
             if(status) {
                 openHomeScreen();
             }else{
-                Toast.makeText(LoginActivity.this, "Failed to login!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
                 login_Lottie_loading.setVisibility(View.INVISIBLE);
             }
         }

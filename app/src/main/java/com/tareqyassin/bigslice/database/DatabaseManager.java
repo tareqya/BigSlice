@@ -84,7 +84,12 @@ public class DatabaseManager {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                             if(callBack_auth != null) {
-                                callBack_auth.onLoginDone(task.isSuccessful());
+                                if(task.isSuccessful()){
+                                    callBack_auth.onLoginDone(true, "");
+                                }else{
+                                    callBack_auth.onLoginDone(false, task.getException().getMessage());
+
+                                }
                             }
                     }
                 });

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tareqyassin.bigslice">
+    package="com.Aya.bigslice">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".App"
+        android:name="com.Aya.bigslice.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_icon_launcher"
         android:label="@string/app_name"
@@ -17,27 +17,27 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.BigSlice">
         <activity
-            android:name=".main.homescreens.ProductActivity"
+            android:name="com.Aya.bigslice.main.homescreens.ProductActivity"
             android:exported="true"
-            android:parentActivityName=".main.MainActivity"
+            android:parentActivityName="com.Aya.bigslice.main.MainActivity"
             />
         <activity
-            android:name=".main.profilescreens.UpdateLocationActivity"
+            android:name="com.Aya.bigslice.main.profilescreens.UpdateLocationActivity"
             android:exported="true"
-            android:parentActivityName=".main.MainActivity" />
+            android:parentActivityName="com.Aya.bigslice.main.MainActivity" />
         <activity
-            android:name=".main.profilescreens.EditAccountActivity"
+            android:name="com.Aya.bigslice.main.profilescreens.EditAccountActivity"
             android:exported="true"
-            android:parentActivityName=".main.MainActivity" />
+            android:parentActivityName="com.Aya.bigslice.main.MainActivity" />
         <activity
-            android:name=".main.MainActivity"
+            android:name="com.Aya.bigslice.main.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".auth.SignupActivity"
+            android:name="com.Aya.bigslice.auth.SignupActivity"
             android:exported="true"
-            android:parentActivityName=".auth.LoginActivity" />
+            android:parentActivityName="com.Aya.bigslice.auth.LoginActivity" />
         <activity
-            android:name=".auth.LoginActivity"
+            android:name="com.Aya.bigslice.auth.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

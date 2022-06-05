@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.profilescreens.EditAccountActivity">
+    tools:context="com.project.bigslice.main.profilescreens.EditAccountActivity">
 
     <TextView
         android:id="@+id/editAccount_TV_title"
